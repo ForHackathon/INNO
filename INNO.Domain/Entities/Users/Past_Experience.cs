@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using INNO.Domain.Commons;
 
-namespace INNO.Domain.Entities
+namespace INNO.Domain.Entities.Users;
+public class Past_Experience : Auditable
 {
-    internal class Past_Experience
-    {
-    }
+    public long UserId { get; set; }
+
+    public User User { get; set; }
+
+    public string Description { get; set; }
+
+    public string FirstName { get; set; }
+
+    public string LastName { get; set; }
+
+    public string? Path { get; set; }
 }

@@ -1,10 +1,8 @@
 ﻿using INNO.Domain.Commons;
-using INNO.Domain.Entities.User;
 
 namespace INNO.Domain.Entities.Users;
 public class User : Auditable
 {
-    public long UserId { get; set; }
     public string FirstName { get; set; }
 
     public string LastName { get; set; }

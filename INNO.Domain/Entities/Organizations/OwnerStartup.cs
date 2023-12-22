@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using INNO.Domain.Commons;
+using INNO.Domain.Entities.Users;
 
-namespace INNO.Domain.Entities
+namespace INNO.Domain.Entities.Organizations;
+public class OwnerStartup : Auditable
 {
-    internal class OwnerStartup
-    {
-    }
+    public long UserId { get; set; }
+
+    public User User { get; set; }
+
+    public string Title { get; set; }
+
+    public string StartupDescription { get; set; }
+
+    public string? Path { get; set; }
+
+    public long CategoryId { get; set; }
+
 }

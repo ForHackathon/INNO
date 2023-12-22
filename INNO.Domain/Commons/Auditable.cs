@@ -1,6 +1,6 @@
 ﻿namespace INNO.Domain.Commons
 {
-    public class Audituble
+    public class Auditable
     {
         public int Id { get; set; }
         public DateTime DateTime { get; set; } = DateTime.UtcNow;

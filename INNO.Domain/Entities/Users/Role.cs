@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using INNO.Domain.Commons;
 
-namespace INNO.Domain.Entities
+namespace INNO.Domain.Entities.Users;
+public class Role : Auditable
 {
-    internal class Role
-    {
-    }
+    public string  Name { get; set; }
+
 }
