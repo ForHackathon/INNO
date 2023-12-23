@@ -11,6 +11,6 @@ namespace INNO.Service.Interfaces.IOrganisations
         public Task<OrganizationForViewDTO> UpdateAsync(OrganizationForUpdateDTO org);
         public Task<bool> DeleteAsync(Expression<Func<Organization, bool>> expression);
         public Task<OrganizationForViewDTO> GetByIdAsync(Expression<Func<Organization, bool>> expression);
-        public Task<ICollection<OrganizationForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<Organization, bool>> expression);
+        public Task<ICollection<OrganizationForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<Organization, bool>> expression = null );
     }
 }

@@ -31,7 +31,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : Auditable
         return true;
     }
 
-    public IQueryable<T> GetAllAsync(Expression<Func<T,bool>> expression,
+    public IQueryable<T> GetAllAsync(Expression<Func<T, bool>> expression = null    ,
         string[] includes = null,
         bool isTracking = true)
     {

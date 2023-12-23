@@ -61,7 +61,8 @@ public class OrganizationService : IOrganisationService
         return true;
     }
 
-    public async Task<ICollection<OrganizationForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<Organization, bool>> expression)
+    public async Task<ICollection<OrganizationForViewDTO>> GetAsync(PaginationParams @params,
+        Expression<Func<Organization, bool>> expression = null)
     {
         var values = _repository.GetAllAsync(expression: expression, isTracking: false);
         return _mapper.Map<ICollection<OrganizationForViewDTO>>(await values.ToPagedList(@params).ToListAsync());
