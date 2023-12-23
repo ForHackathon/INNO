@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using INNO.Data.IRepositories;
 using INNO.Domain.Configuration;
+using INNO.Domain.Entities.Attachments;
 using INNO.Domain.Entities.Organizations;
 using INNO.Domain.Entities.Users;
 using INNO.Service.DTOs.Startups;
@@ -18,14 +19,19 @@ public class StartupService : IStartupService
 {
     private readonly IGenericRepository<OwnerStartup> _repository;
     private readonly IMapper _mapper;
-    public StartupService(IGenericRepository<OwnerStartup> repository, IMapper mapper)
+    private readonly IFileService _fileService;
+    public StartupService(IGenericRepository<OwnerStartup> repository, IMapper mapper, IFileService fileService)
     {
-        _repository = repository;
-        _mapper = mapper;
+        this._repository = repository;
+        this._mapper = mapper;
+        this._fileService = fileService;
     }
 
     public async Task<StartupForViewDTO> CreateAsync(StartupForCreationDTO startap)
     {
+        Attachment file = default!;
+        if (startap.Image is not null)
+            file = await _fileService.CreateAsync(startap.Image);
         var value = await  _repository.GetAsync(s => s.Title == startap.Title);
         if (value is not null)
         {

@@ -1,4 +1,6 @@
-﻿namespace INNO.Service.DTOs.Organizations;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace INNO.Service.DTOs.Organizations;
 public class OrganizationForCreationDTO
 {
     public string Title { get; set; }
@@ -8,4 +10,5 @@ public class OrganizationForCreationDTO
     public decimal AllocatedMoney { get; set; }
 
     public decimal ExpectedBenefit { get; set; }
+    public IFormFile? Image {  get; set; } 
 }

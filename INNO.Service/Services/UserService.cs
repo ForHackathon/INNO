@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using INNO.Data.IRepositories;
 using INNO.Domain.Configuration;
+using INNO.Domain.Entities.Attachments;
 using INNO.Domain.Entities.Users;
 using INNO.Service.DTOs.Users;
 using INNO.Service.Exceptions;
@@ -16,13 +17,19 @@ public class UserService : IUserService
 {
     private readonly IGenericRepository<User> _repository;
     private readonly IMapper _mapper;
-    public UserService(IGenericRepository<User> repository, IMapper mapper)
+    private readonly IFileService _fileService;
+    public UserService(IGenericRepository<User> repository, IMapper mapper, IFileService fileService)
     {
         this._repository = repository;
         this._mapper = mapper;
+        this._fileService = fileService;
     }
     public async Task<UserForViewDTO> CreateAsync(UserForCreationDTO user)
     {
+        Attachment file = default!;
+        if (user.Image is not null)
+            file = await _fileService.CreateAsync(user.Image);
+
         var value = await _repository.GetAsync(u => u.Email == user.Email);
         if (value is not null)
         {
@@ -91,4 +98,24 @@ public class UserService : IUserService
 
         return _mapper.Map<UserForViewDTO>(user);
     }
+
+    public async Task<bool> ChangePasswordAsync(UserForChangePasswordDTO userForChangePasswordDTO)
+    {
+        var user = await _repository.GetAsync(u => u.Id == HttpContextHelper.UserId);
+
+        if (user == null)
+            throw new CustomException(404, "User not found");
+
+        if (user.Password != userForChangePasswordDTO.OldPassword.Encrypt())
+            throw new CustomException(400, "Password is Incorrect");
+
+
+        user.Password = userForChangePasswordDTO.NewPassword.Encrypt();
+
+        await _repository.UpdateAsync(user);
+        await _repository.SaveChangesAsync();
+        return true;
+    }
+
+
 }

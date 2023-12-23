@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using INNO.Data.IRepositories;
 using INNO.Domain.Configuration;
+using INNO.Domain.Entities.Attachments;
 using INNO.Domain.Entities.Organizations;
 using INNO.Domain.Entities.Users;
 using INNO.Service.DTOs.Organizations;
@@ -17,14 +18,20 @@ public class OrganizationService : IOrganisationService
 {
     private readonly IGenericRepository<Organization> _repository;
     private readonly IMapper _mapper;
+    private readonly IFileService _fileService;
    
-    public OrganizationService(IGenericRepository<Organization> repository, IMapper mapper)
+    public OrganizationService(IGenericRepository<Organization> repository, IMapper mapper, IFileService fileService)
     {
-        _repository = repository;
-        _mapper = mapper;
+        this._repository = repository;
+        this._mapper = mapper;
+        this._fileService = fileService;
     }
     public async Task<OrganizationForViewDTO> CreateAsync(OrganizationForCreationDTO org)
     {
+        Attachment file = default!;
+        if (org.Image is not null)
+            file = await _fileService.CreateAsync(org.Image);
+
         var value = await _repository.GetAsync(o => o.Title == org.Title);
         if (value is not null)
         {
