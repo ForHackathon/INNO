@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace INNO.Service.DTOs.Startups
+﻿namespace INNO.Service.DTOs.Startups;
+public class StartupForCreationDTO
 {
-    internal class StartupForCreationDTO
-    {
-    }
+    public string Title { get; set; }
+
+    public string StartupDescription { get; set; }
+
+    public string? Path { get; set; }
+
 }
