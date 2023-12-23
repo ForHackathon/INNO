@@ -1,4 +1,5 @@
 ﻿using INNO.Domain.Commons;
+using INNO.Domain.Entities.Attachments;
 using INNO.Domain.Entities.Categories;
 using INNO.Domain.Entities.Users;
 
@@ -13,6 +14,8 @@ public class OwnerStartup : Auditable
 
     public string StartupDescription { get; set; }
 
+    public long AttachmentId { get; set; }
+    public Attachment attachments { get; set; }
     public string? Path { get; set; }
 
     public long CategoryId { get; set; }

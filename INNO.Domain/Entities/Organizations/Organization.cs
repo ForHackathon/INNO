@@ -1,6 +1,8 @@
 ﻿using INNO.Domain.Commons;
 using INNO.Domain.Entities.Users;
 using INNO.Domain.Entities.Categories;
+using System.Net.Mail;
+
 namespace INNO.Domain.Entities.Organizations;
 public class Organization : Auditable
 {
@@ -16,6 +18,8 @@ public class Organization : Auditable
     public decimal AllocatedMoney { get; set; }
 
     public decimal ExpectedBenefit { get; set; }
+    public long AttachmentId { get; set; }
+    public Attachment Attachment { get; set; }
 
     public long CategoryId { get; set; }
 
