@@ -20,5 +20,7 @@ public class OwnerStartup : Auditable
 
     public long CategoryId { get; set; }
     public Category Category { get; set; }
+    public int Status { get; set; } = 0;
+
 
 }
