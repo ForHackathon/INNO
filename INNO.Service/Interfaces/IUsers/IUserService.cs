@@ -13,7 +13,7 @@ namespace INNO.Service.Interfaces.IUsers
         public Task<UserForViewDTO> UpdateAsync(long id, UserForUpdateDTO user);
         public Task<bool> DeleteAsync(Expression<Func<User, bool>> expression);
         public Task<UserForViewDTO> GetByIdAsync(Expression<Func<User, bool>> expression);
-        public Task<ICollection<UserForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<User, bool>> expression);
+        public Task<ICollection<UserForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<User, bool>> expression = null);
         public Task<bool> ChangePasswordAsync(UserForChangePasswordDTO userForChangePasswordDTO);
 
     }

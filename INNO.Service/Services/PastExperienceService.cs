@@ -62,7 +62,8 @@ public class PastExperienceService : IPastExperienceService
         return true;
     }
 
-    public async Task<ICollection<PastExperienceForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<PastExperience, bool>> expression)
+    public async Task<ICollection<PastExperienceForViewDTO>> GetAsync(PaginationParams @params,
+        Expression<Func<PastExperience, bool>> expression = null)
     {
         var values = _repository.GetAllAsync(expression: expression, isTracking: false);
         return _mapper.Map<ICollection<PastExperienceForViewDTO>>(await values.ToPagedList(@params).ToListAsync());
