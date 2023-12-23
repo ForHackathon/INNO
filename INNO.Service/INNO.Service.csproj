@@ -10,7 +10,6 @@
     <Folder Include="Helpers\" />
     <Folder Include="Services\" />
     <Folder Include="Mappers\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\INNO.Data\INNO.Data.csproj" />
     <ProjectReference Include="..\INNO.Domain\INNO.Domain.csproj" />
   </ItemGroup>
 
