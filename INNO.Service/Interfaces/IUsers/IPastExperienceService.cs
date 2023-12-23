@@ -5,7 +5,7 @@ using INNO.Service.DTOs.Organizations;
 using INNO.Service.DTOs.PastExperiences;
 using System.Linq.Expressions;
 
-namespace INNO.Service.Interfaces;
+namespace INNO.Service.Interfaces.IUsers;
 public interface IPastExperienceService
 {
     public Task<PastExperienceForViewDTO> CreateAsync(PastExperienceForCreationDTO Past);

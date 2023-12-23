@@ -9,7 +9,8 @@ using INNO.Service.DTOs.Users;
 using INNO.Service.Exceptions;
 using INNO.Service.Extantions;
 using INNO.Service.Helpers;
-using INNO.Service.Interfaces;
+using INNO.Service.Interfaces.IExtantions;
+using INNO.Service.Interfaces.IStartups;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
