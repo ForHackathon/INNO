@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace INNO.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231223034337_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20231223072103_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,17 +27,14 @@ namespace INNO.Data.Migrations
 
             modelBuilder.Entity("INNO.Domain.Entities.Application.Apps", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("CategoryId1")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
@@ -45,20 +42,11 @@ namespace INNO.Data.Migrations
                     b.Property<long>("OrganizationId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("OrganizationId1")
-                        .HasColumnType("integer");
-
                     b.Property<long>("OwnerStartupId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("OwnerStartupId1")
-                        .HasColumnType("integer");
-
                     b.Property<long>("ProductOwnerId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("ProductOwnerId1")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -69,24 +57,24 @@ namespace INNO.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("OrganizationId1");
+                    b.HasIndex("OrganizationId");
 
-                    b.HasIndex("OwnerStartupId1");
+                    b.HasIndex("OwnerStartupId");
 
-                    b.HasIndex("ProductOwnerId1");
+                    b.HasIndex("ProductOwnerId");
 
                     b.ToTable("Appss");
                 });
 
             modelBuilder.Entity("INNO.Domain.Entities.Application.OrganizationApps", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
@@ -94,42 +82,33 @@ namespace INNO.Data.Migrations
                     b.Property<long>("InvesterId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("InvesterId1")
-                        .HasColumnType("integer");
-
                     b.Property<long>("OrganizationId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("OrganizationId1")
-                        .HasColumnType("integer");
-
                     b.Property<long>("OwnerStartupId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("OwnerStartupId1")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvesterId1");
+                    b.HasIndex("InvesterId");
 
-                    b.HasIndex("OrganizationId1");
+                    b.HasIndex("OrganizationId");
 
-                    b.HasIndex("OwnerStartupId1");
+                    b.HasIndex("OwnerStartupId");
 
                     b.ToTable("OrganizationApps");
                 });
 
             modelBuilder.Entity("INNO.Domain.Entities.Categories.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
@@ -154,20 +133,17 @@ namespace INNO.Data.Migrations
 
             modelBuilder.Entity("INNO.Domain.Entities.Organizations.Organization", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<decimal>("AllocatedMoney")
                         .HasColumnType("numeric");
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("CategoryId1")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
@@ -189,34 +165,28 @@ namespace INNO.Data.Migrations
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("UserId1")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("Title")
                         .IsUnique();
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Organizations");
                 });
 
             modelBuilder.Entity("INNO.Domain.Entities.Organizations.OwnerStartup", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("CategoryId1")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
@@ -238,28 +208,25 @@ namespace INNO.Data.Migrations
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("UserId1")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("Title")
                         .IsUnique();
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("OwnerStartups");
                 });
 
             modelBuilder.Entity("INNO.Domain.Entities.Users.Past_Experience", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
@@ -285,23 +252,20 @@ namespace INNO.Data.Migrations
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("UserId1")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Past_Experiences");
                 });
 
             modelBuilder.Entity("INNO.Domain.Entities.Users.Role", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
@@ -320,11 +284,11 @@ namespace INNO.Data.Migrations
 
             modelBuilder.Entity("INNO.Domain.Entities.Users.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
@@ -348,9 +312,6 @@ namespace INNO.Data.Migrations
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("RoleId1")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -359,18 +320,18 @@ namespace INNO.Data.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("RoleId1");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("INNO.Domain.Entities.Users.UserRole", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
@@ -378,23 +339,17 @@ namespace INNO.Data.Migrations
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("RoleId1")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("UserId1")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId1");
+                    b.HasIndex("RoleId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
                 });
@@ -403,25 +358,25 @@ namespace INNO.Data.Migrations
                 {
                     b.HasOne("INNO.Domain.Entities.Categories.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId1")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Organizations.Organization", "Organization")
                         .WithMany()
-                        .HasForeignKey("OrganizationId1")
+                        .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Organizations.OwnerStartup", "OwnerStartup")
                         .WithMany()
-                        .HasForeignKey("OwnerStartupId1")
+                        .HasForeignKey("OwnerStartupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Users.User", "ProductOwner")
                         .WithMany()
-                        .HasForeignKey("ProductOwnerId1")
+                        .HasForeignKey("ProductOwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -438,19 +393,19 @@ namespace INNO.Data.Migrations
                 {
                     b.HasOne("INNO.Domain.Entities.Users.User", "Invester")
                         .WithMany()
-                        .HasForeignKey("InvesterId1")
+                        .HasForeignKey("InvesterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Organizations.Organization", "Organization")
                         .WithMany()
-                        .HasForeignKey("OrganizationId1")
+                        .HasForeignKey("OrganizationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Organizations.OwnerStartup", "OwnerStartup")
                         .WithMany()
-                        .HasForeignKey("OwnerStartupId1")
+                        .HasForeignKey("OwnerStartupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -465,13 +420,13 @@ namespace INNO.Data.Migrations
                 {
                     b.HasOne("INNO.Domain.Entities.Categories.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId1")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Users.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -484,13 +439,13 @@ namespace INNO.Data.Migrations
                 {
                     b.HasOne("INNO.Domain.Entities.Categories.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId1")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Users.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -503,7 +458,7 @@ namespace INNO.Data.Migrations
                 {
                     b.HasOne("INNO.Domain.Entities.Users.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -514,7 +469,7 @@ namespace INNO.Data.Migrations
                 {
                     b.HasOne("INNO.Domain.Entities.Users.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId1")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -525,13 +480,13 @@ namespace INNO.Data.Migrations
                 {
                     b.HasOne("INNO.Domain.Entities.Users.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId1")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Users.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
