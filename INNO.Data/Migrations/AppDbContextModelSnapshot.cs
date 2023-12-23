@@ -33,7 +33,7 @@ namespace INNO.Data.Migrations
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("CreatAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("OrganizationId")
@@ -73,7 +73,7 @@ namespace INNO.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("CreatAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("InvesterId")
@@ -99,6 +99,33 @@ namespace INNO.Data.Migrations
                     b.ToTable("OrganizationApps");
                 });
 
+            modelBuilder.Entity("INNO.Domain.Entities.Attachments.Attachment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdateAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Attachments");
+                });
+
             modelBuilder.Entity("INNO.Domain.Entities.Categories.Category", b =>
                 {
                     b.Property<long>("Id")
@@ -110,7 +137,7 @@ namespace INNO.Data.Migrations
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("CreatAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Title")
@@ -139,10 +166,13 @@ namespace INNO.Data.Migrations
                     b.Property<decimal>("AllocatedMoney")
                         .HasColumnType("numeric");
 
+                    b.Property<long>("AttachmentId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("CreatAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<decimal>("ExpectedBenefit")
@@ -151,6 +181,9 @@ namespace INNO.Data.Migrations
                     b.Property<string>("OrganizationDescription")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -163,6 +196,9 @@ namespace INNO.Data.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AttachmentId")
+                        .IsUnique();
 
                     b.HasIndex("CategoryId");
 
@@ -182,10 +218,13 @@ namespace INNO.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<long>("AttachmentId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("CreatAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Path")
@@ -194,6 +233,9 @@ namespace INNO.Data.Migrations
                     b.Property<string>("StartupDescription")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -207,6 +249,9 @@ namespace INNO.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AttachmentId")
+                        .IsUnique();
+
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("Title")
@@ -217,7 +262,7 @@ namespace INNO.Data.Migrations
                     b.ToTable("OwnerStartups");
                 });
 
-            modelBuilder.Entity("INNO.Domain.Entities.Users.Past_Experience", b =>
+            modelBuilder.Entity("INNO.Domain.Entities.Users.PastExperience", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -225,22 +270,18 @@ namespace INNO.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("CreatAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdateAt")
@@ -264,7 +305,7 @@ namespace INNO.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("CreatAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
@@ -287,7 +328,10 @@ namespace INNO.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<long>("AttachmentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -314,6 +358,9 @@ namespace INNO.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AttachmentId")
+                        .IsUnique();
+
                     b.HasIndex("Email")
                         .IsUnique();
 
@@ -330,7 +377,7 @@ namespace INNO.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("CreatAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("RoleId")
@@ -415,6 +462,12 @@ namespace INNO.Data.Migrations
 
             modelBuilder.Entity("INNO.Domain.Entities.Organizations.Organization", b =>
                 {
+                    b.HasOne("INNO.Domain.Entities.Attachments.Attachment", "Attachment")
+                        .WithOne("Organization")
+                        .HasForeignKey("INNO.Domain.Entities.Organizations.Organization", "AttachmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("INNO.Domain.Entities.Categories.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
@@ -426,6 +479,8 @@ namespace INNO.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Attachment");
 
                     b.Navigation("Category");
 
@@ -434,6 +489,12 @@ namespace INNO.Data.Migrations
 
             modelBuilder.Entity("INNO.Domain.Entities.Organizations.OwnerStartup", b =>
                 {
+                    b.HasOne("INNO.Domain.Entities.Attachments.Attachment", "attachments")
+                        .WithOne("OwnerStartup")
+                        .HasForeignKey("INNO.Domain.Entities.Organizations.OwnerStartup", "AttachmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("INNO.Domain.Entities.Categories.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
@@ -441,7 +502,7 @@ namespace INNO.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Users.User", "User")
-                        .WithMany()
+                        .WithMany("ownerStartups")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -449,9 +510,11 @@ namespace INNO.Data.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("User");
+
+                    b.Navigation("attachments");
                 });
 
-            modelBuilder.Entity("INNO.Domain.Entities.Users.Past_Experience", b =>
+            modelBuilder.Entity("INNO.Domain.Entities.Users.PastExperience", b =>
                 {
                     b.HasOne("INNO.Domain.Entities.Users.User", "User")
                         .WithMany()
@@ -464,11 +527,19 @@ namespace INNO.Data.Migrations
 
             modelBuilder.Entity("INNO.Domain.Entities.Users.User", b =>
                 {
+                    b.HasOne("INNO.Domain.Entities.Attachments.Attachment", "Attachment")
+                        .WithOne("User")
+                        .HasForeignKey("INNO.Domain.Entities.Users.User", "AttachmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("INNO.Domain.Entities.Users.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Attachment");
 
                     b.Navigation("Role");
                 });
@@ -490,6 +561,20 @@ namespace INNO.Data.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("INNO.Domain.Entities.Attachments.Attachment", b =>
+                {
+                    b.Navigation("Organization");
+
+                    b.Navigation("OwnerStartup");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("INNO.Domain.Entities.Users.User", b =>
+                {
+                    b.Navigation("ownerStartups");
                 });
 #pragma warning restore 612, 618
         }

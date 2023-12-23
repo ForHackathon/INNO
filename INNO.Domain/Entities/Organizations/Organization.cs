@@ -1,7 +1,7 @@
 ﻿using INNO.Domain.Commons;
 using INNO.Domain.Entities.Users;
 using INNO.Domain.Entities.Categories;
-using System.Net.Mail;
+using INNO.Domain.Entities.Attachments;
 
 namespace INNO.Domain.Entities.Organizations;
 public class Organization : Auditable

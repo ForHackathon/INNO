@@ -1,7 +1,6 @@
 ﻿using INNO.Domain.Entities.Application;
 using INNO.Domain.Entities.Attachments;
 using INNO.Domain.Entities.Categories;
-using INNO.Domain.Entities.Categories;
 using INNO.Domain.Entities.Organizations;
 using INNO.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
