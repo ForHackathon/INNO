@@ -10,8 +10,8 @@ namespace INNO.Service.Interfaces
     {
         public Task<UserForViewDTO> CreateAsync(UserForCreationDTO user);
         public Task<UserForViewDTO> UpdateAsync(UserForUpdateDTO user);
-        public Task<bool> DeleteAsync(string email);
-        public Task<UserForViewDTO> GetByIdAsync(Expression<Func<UserForViewDTO,bool>> expression);
-        public Task<ICollection<UserForViewDTO>> GetAsync(Expression<Func<UserForViewDTO, bool>> expression);
+        public Task<bool> DeleteAsync(long id);
+        public Task<UserForViewDTO> GetByIdAsync(Expression<Func<User,bool>> expression);
+        public Task<ICollection<UserForViewDTO>> GetAsync(Expression<Func<User, bool>> expression);
     }
 }
