@@ -39,15 +39,15 @@ public class UserService : IUserService
 
     }
 
-    public async Task<bool> DeleteAsync(long id)
+    public async Task<bool> DeleteAsync(Expression<Func<User, bool>> expression)
     {
-        var value = await _repository.GetAsync(o => o.Id == id);
+        var value = await _repository.GetAsync(expression);
         if (value is not null)
         {
             throw new CustomException(404, "User not found");
         }
 
-        await _repository.DeleteAsync(o => o.Id == id);
+        await _repository.DeleteAsync(expression);
         await _repository.SaveChangesAsync();
 
         return true;
