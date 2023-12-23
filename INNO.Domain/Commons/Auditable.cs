@@ -2,7 +2,7 @@
 {
     public class Auditable
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public DateTime DateTime { get; set; } = DateTime.UtcNow;
         public DateTime? UpdateAt { get; set; } = null;
 

@@ -2,6 +2,7 @@
 using INNO.Data.IRepositories;
 using INNO.Domain.Commons;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace INNO.Data.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : Auditable
@@ -15,10 +16,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : Auditable
         this.dbSet = dbSet;
     }
 
-    public async ValueTask<T> CreateAsync(T entity) =>
+    public async Task<T> CreateAsync(T entity) =>
             (await appDbContext.AddAsync(entity)).Entity;
 
-    public async ValueTask<bool> DeleteAsync(System.Linq.Expressions.Expression<Func<T, bool>> expression)
+    public async Task<bool> DeleteAsync(System.Linq.Expressions.Expression<Func<T, bool>> expression)
     {
         var entity = await GetAsync(expression);
 
@@ -30,23 +31,29 @@ public class GenericRepository<T> : IGenericRepository<T> where T : Auditable
         return true;
     }
 
-    public IQueryable<T> GetAllAsync(System.Linq.Expressions.Expression<Func<T, bool>> expression, string[] includes = null, bool IsTracking = true)
+    public IQueryable<T> GetAllAsync(System.Linq.Expressions.Expression<Func<T,bool>> expression,
+        string[] includes = null,
+        bool isTracking = true)
     {
-        throw new NotImplementedException();
+        IQueryable<T> query = expression is null ? dbSet : dbSet.Where(expression);
+
+        if (includes != null)
+            foreach (var include in includes)
+                if (!string.IsNullOrEmpty(include))
+                    query = query.Include(include);
+
+        if (!isTracking)
+            query = query.AsNoTracking();
+
+        return query;
     }
 
-    public ValueTask<T> GetAsync(System.Linq.Expressions.Expression<Func<T, bool>> expression, string[] includes = null)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<T> GetAsync(Expression<Func<T, bool>> expression, string[] includes = null) =>
+         await GetAllAsync(expression, includes, false).FirstOrDefaultAsync();
 
-    public ValueTask SaveChangesAsync()
-    {
-        throw new NotImplementedException();
-    }
+    public async Task SaveChangesAsync() =>
+        await appDbContext.SaveChangesAsync();
 
-    public ValueTask<T> UpdateAsync(T entity)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<T> UpdateAsync(T entity) =>
+        dbSet.Update(entity).Entity;
 }

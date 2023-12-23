@@ -1,4 +1,6 @@
 ﻿using INNO.Domain.Entities.Application;
+using INNO.Domain.Entities.Categories;
+using INNO.Domain.Entities.Categories;
 using INNO.Domain.Entities.Organizations;
 using INNO.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
@@ -30,9 +32,14 @@ public class AppDbContext : DbContext
             .HasIndex(o => o.Title)
             .IsUnique(true);
 
+        modelBuilder.Entity<Category>()
+            .HasIndex(o => o.Title)
+            .IsUnique(true);
+
         modelBuilder.Entity<OwnerStartup>()
             .HasIndex(o => o.Title)
             .IsUnique(true);
+
 
     }
 }

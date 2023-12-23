@@ -1,6 +1,6 @@
 ﻿using INNO.Domain.Commons;
-using INNO.Domain.Entities.Application;
 using INNO.Domain.Entities.Users;
+using INNO.Domain.Entities.Categories;
 namespace INNO.Domain.Entities.Organizations;
 public class Organization : Auditable
 {
