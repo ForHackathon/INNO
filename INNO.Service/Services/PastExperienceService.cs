@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using INNO.Data.IRepositories;
 using INNO.Domain.Configuration;
+using INNO.Domain.Entities.Attachments;
 using INNO.Domain.Entities.Organizations;
 using INNO.Domain.Entities.Users;
 using INNO.Service.DTOs.Organizations;
@@ -11,7 +12,6 @@ using INNO.Service.Interfaces.IExtantions;
 using INNO.Service.Interfaces.IUsers;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Net.Mail;
 
 namespace INNO.Service.Services;
 public class PastExperienceService : IPastExperienceService
@@ -29,6 +29,10 @@ public class PastExperienceService : IPastExperienceService
 
     public async Task<PastExperienceForViewDTO> CreateAsync(PastExperienceForCreationDTO Past)
     {
+        Attachment file = default!;
+        if (Past.File is not null)
+            file = await _fileService.CreateAsync(Past.File);
+
 
         var value = await _repository.GetAsync(P => P.Title == Past.Title);
         if (value is not null)
