@@ -19,7 +19,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : Auditable
     public async Task<T> CreateAsync(T entity) =>
             (await appDbContext.AddAsync(entity)).Entity;
 
-    public async Task<bool> DeleteAsync(System.Linq.Expressions.Expression<Func<T, bool>> expression)
+    public async Task<bool> DeleteAsync(Expression<Func<T, bool>> expression)
     {
         var entity = await GetAsync(expression);
 
@@ -31,7 +31,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : Auditable
         return true;
     }
 
-    public IQueryable<T> GetAllAsync(System.Linq.Expressions.Expression<Func<T,bool>> expression,
+    public IQueryable<T> GetAllAsync(Expression<Func<T,bool>> expression,
         string[] includes = null,
         bool isTracking = true)
     {
