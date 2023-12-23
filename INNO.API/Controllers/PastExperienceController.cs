@@ -29,7 +29,7 @@ namespace INNO.API.Controllers
         public async ValueTask<IActionResult> GetAllAsync([FromBody] PaginationParams @paginationParams)
             => Ok(await pastExperience.GetAsync(@paginationParams));
 
-        [HttpGet]
+        [HttpGet("{Id}")]
         public async ValueTask<IActionResult> GetAsync([FromRoute] string title)
             => Ok(await pastExperience.GetByIdAsync(p => p.Title == title));
 

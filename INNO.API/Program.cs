@@ -34,8 +34,8 @@ namespace INNO.API
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer()
-                            .AddSwaggerGen()
                             .AddAutoMapper(typeof(MappingProfile))
+                            .AddSwaggerGen()
                             .AddJwtService(builder.Configuration)
                             .AddDatabaseSettings(builder.Configuration);
 
