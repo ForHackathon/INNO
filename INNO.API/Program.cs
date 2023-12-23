@@ -6,6 +6,7 @@ using INNO.Service.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
+
 namespace INNO.API
 {
     public class Program
@@ -39,7 +40,7 @@ namespace INNO.API
                             .AddJwtService(builder.Configuration)
                             .AddDatabaseSettings(builder.Configuration);
 
-                            //.AddSwaggerService()
+            //.AddSwaggerService()
 
 
             var app = builder.Build();
