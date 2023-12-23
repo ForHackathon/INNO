@@ -1,4 +1,5 @@
-﻿using INNO.Domain.Entities.Organizations;
+﻿using INNO.Domain.Configuration;
+using INNO.Domain.Entities.Organizations;
 using INNO.Service.DTOs.Organizations;
 using System.Linq.Expressions;
 
@@ -8,8 +9,8 @@ namespace INNO.Service.Interfaces
     {
         public Task<OrganizationForViewDTO> CreateAsync(OrganizationForCreationDTO org);
         public Task<OrganizationForViewDTO> UpdateAsync(OrganizationForUpdateDTO org);
-        public Task<bool> DeleteAsync(long id);
-        public Task<OrganizationForViewDTO> GetByIdAsync(Expression<Func<Organization, bool>> expression);
-        public Task<ICollection<OrganizationForViewDTO>> GetAsync(Expression<Func<Organization, bool>> expression);
+        public Task<bool> DeleteAsync(Expression<Func<Organization, bool>>expression);
+        public Task<OrganizationForViewDTO> GetByIdAsync( Expression<Func<Organization, bool>> expression);
+        public Task<ICollection<OrganizationForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<Organization, bool>> expression);
     }
 }
