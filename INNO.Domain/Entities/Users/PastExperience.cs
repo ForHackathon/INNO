@@ -1,5 +1,6 @@
 ﻿
 using INNO.Domain.Commons;
+using Microsoft.AspNetCore.Http;
 
 namespace INNO.Domain.Entities.Users;
 public class PastExperience : Auditable
@@ -13,4 +14,6 @@ public class PastExperience : Auditable
     public string Description { get; set; }
 
     public string? Path { get; set; }
+
+
 }
