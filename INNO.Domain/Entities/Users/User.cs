@@ -1,4 +1,5 @@
 ﻿using INNO.Domain.Commons;
+using INNO.Domain.Entities.Organizations;
 
 namespace INNO.Domain.Entities.Users;
 public class User : Auditable
@@ -14,5 +15,7 @@ public class User : Auditable
     public long RoleId { get; set; }
 
     public Role Role { get; set; }
+    
+    public ICollection<OwnerStartup> ownerStartups { get; set; } 
 
 }

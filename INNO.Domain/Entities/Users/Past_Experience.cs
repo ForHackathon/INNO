@@ -1,4 +1,5 @@
-﻿using INNO.Domain.Commons;
+﻿
+using INNO.Domain.Commons;
 
 namespace INNO.Domain.Entities.Users;
 public class Past_Experience : Auditable
