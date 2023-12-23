@@ -1,19 +1,20 @@
-﻿using System.Linq.Expressions;
+﻿using INNO.Domain.Commons;
+using System.Linq.Expressions;
 
 namespace INNO.Data.IRepositories;
-public interface IGenericRepository<T> where T : class
+public interface IGenericRepository<T> where T : Auditable
 {
-    ValueTask<T> CreateAsync(T entity);
+    public Task<T> CreateAsync(T entity);
 
-    ValueTask<T> UpdateAsync(T entity);
+    public Task<T> UpdateAsync(T entity);
 
-    ValueTask<bool> DeleteAsync(Expression<Func<T, bool>> expression);
+    public Task<bool> DeleteAsync(Expression<Func<T, bool>> expression);
 
-    ValueTask<T> GetAsync(Expression<Func<T, bool>> expression, string[] includes = null);
+    public Task<T> GetAsync(Expression<Func<T, bool>> expression, string[] includes = null);
 
     IQueryable<T> GetAllAsync(Expression<Func<T, bool>> expression,
         string[] includes = null,
-        bool IsTracking = true);
+        bool isTracking = true);
 
-    public ValueTask SaveChangesAsync();
+    public Task SaveChangesAsync();
 }
