@@ -33,7 +33,7 @@ namespace INNO.API.Controllers
         public async ValueTask<IActionResult> GetAsync([FromRoute] string title)
            => Ok( await _startupService.GetByIdAsync(u => u.Title == title));
         
-        [HttpDelete("{Titile}")]
+        [HttpDelete("{Title}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] string title)
             => Ok(await _startupService.DeleteAsync(s => s.Title == title));
 
