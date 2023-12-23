@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace INNO.Service.DTOs.Organizations
+﻿namespace INNO.Service.DTOs.Organizations;
+public class OrganizationForUpdateDTO
 {
-    internal class OrganizationForUpdateDTO
-    {
-    }
+    public string OrganizationDescription { get; set; }
+
+    public decimal AllocatedMoney { get; set; }
+
+    public decimal ExpectedBenefit { get; set; }
 }

@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Atributes\" />
-    <Folder Include="DTOs\PastExperiences\" />
-    <Folder Include="DTOs\Startups\" />
     <Folder Include="Services\" />
     <Folder Include="Mappers\" />
     <Folder Include="Interfaces\" />
