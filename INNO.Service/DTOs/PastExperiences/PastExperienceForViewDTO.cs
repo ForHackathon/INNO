@@ -9,5 +9,5 @@ public class PastExperienceForViewDTO
 
     public string? Path { get; set; }
 
-    public IFormFile File { get; set; }
+    public IFormFile? File { get; set; }
 }
