@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace INNO.Domain.Configuration
+﻿namespace INNO.Domain.Configuration;
+public class PaginationParams
 {
-    internal class PaginationParams
-    {
-    }
+    public int PageIndex { get; set; }
+    public int PageSize { get; set; }
 }
