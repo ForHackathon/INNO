@@ -1,4 +1,5 @@
 ﻿using INNO.Domain.Commons;
+using INNO.Domain.Entities.Categories;
 using INNO.Domain.Entities.Users;
 
 namespace INNO.Domain.Entities.Organizations;
@@ -15,5 +16,6 @@ public class OwnerStartup : Auditable
     public string? Path { get; set; }
 
     public long CategoryId { get; set; }
+    public Category Category { get; set; }
 
 }
