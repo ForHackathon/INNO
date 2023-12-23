@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Atributes\" />
+    <Folder Include="Services\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Extantions\" />
+  </ItemGroup>
+
+</Project>
