@@ -1,17 +1,23 @@
 ﻿using INNO.Data.DbContexts;
 using INNO.Data.IRepositories;
 using INNO.Data.Repositories;
+using INNO.Domain.Entities.Attachments;
 using INNO.Domain.Entities.Organizations;
 using INNO.Domain.Entities.Users;
+using INNO.Service.Interfaces.IExtantions;
 using INNO.Service.Interfaces.IOrganisations;
 using INNO.Service.Interfaces.IStartups;
 using INNO.Service.Interfaces.IUsers;
+using INNO.Service.Mappers;
 using INNO.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProtoolsStore.Domain.Configurations;
+
 using System.Reflection;
 using System.Text;
 
@@ -19,47 +25,53 @@ namespace INNO.API.Extantions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddSessionStore(this IServiceCollection services, IConfiguration configuration)
+    public static void AddSessionStore(this IServiceCollection services)
     {
-        services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
+        services.AddAutoMapper(typeof(MappingProfile));
+
+        services.AddScoped<IGenericRepository<Attachment>, GenericRepository<Attachment>>();
         services.AddScoped<IGenericRepository<OwnerStartup>, GenericRepository<OwnerStartup>>();
-        services.AddScoped<IGenericRepository<PastExperience>, GenericRepository<PastExperience>>();
         services.AddScoped<IGenericRepository<Organization>, GenericRepository<Organization>>();
+        services.AddScoped<IGenericRepository<PastExperience>, GenericRepository<PastExperience>>();
+        services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
 
-        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IStartupService, StartupService>();
-        services.AddScoped<IPastExperienceService, PastExperienceService>();
         services.AddScoped<IOrganisationService, OrganizationService>();
-
-        return services;
-    }
-
-    public static IServiceCollection AddJwtService(this IServiceCollection services, IConfiguration configuration)
-    {
+        services.AddScoped<IPastExperienceService, PastExperienceService>();
+        services.AddScoped<IUserService, UserService>();
         
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            });
+      
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidIssuer = AuthOptions.ISSUER,
-                        ValidateAudience = true,
-                        ValidAudience = AuthOptions.AUDIENCE,
-                        ValidateLifetime = true,
-                        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-                        ValidateIssuerSigningKey = true,
-                    };
-                });
-        return services;
-
+        
     }
+
+    public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
+    {
+        var jwtSettings = configuration.GetSection("Jwt");
+
+        string key = jwtSettings.GetSection("Key").Value;
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings.GetSection("Issuer").Value,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
+
+            };
+        });
+    }
+
 
     public static IServiceCollection AddDatabaseSettings(
         this IServiceCollection services, IConfiguration configuration)
@@ -71,7 +83,7 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
-    
+
 
     public static IServiceCollection AddSwaggerService(this IServiceCollection services)
     {

@@ -14,12 +14,12 @@ public class User : Auditable
     public string Password { get; set; }
 
     public long AttachmentId { get; set; }
+    public long PastExperienceId { get; set; }
     public Attachment Attachment { get; set; }
 
     public long RoleId { get; set; }
 
     public Role Role { get; set; }
     
-    public ICollection<OwnerStartup> ownerStartups { get; set; } 
 
 }

@@ -1,8 +1,6 @@
 ﻿using INNO.Domain.Configuration;
 using INNO.Service.DTOs.Startups;
 using INNO.Service.Interfaces.IStartups;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace INNO.API.Controllers
@@ -33,7 +31,7 @@ namespace INNO.API.Controllers
         public async ValueTask<IActionResult> GetAsync([FromRoute] string title)
            => Ok( await _startupService.GetByIdAsync(u => u.Title == title));
         
-        [HttpDelete("{Titile}")]
+        [HttpDelete("{Title}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] string title)
             => Ok(await _startupService.DeleteAsync(s => s.Title == title));
 

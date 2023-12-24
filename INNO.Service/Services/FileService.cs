@@ -1,16 +1,12 @@
 ﻿using INNO.Data.IRepositories;
 using INNO.Domain.Entities.Attachments;
 using INNO.Service.Helpers;
+using INNO.Service.Interfaces.IExtantions;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace INNO.Service.Services
 {
-    public class FileService
+    public class FileService : IFileService
     {
         private readonly IGenericRepository<Attachment> _repository;
 
@@ -34,6 +30,11 @@ namespace INNO.Service.Services
             await _repository.SaveChangesAsync();
 
             return res;
+        }
+
+        public Task RemoveAsync(string fileName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

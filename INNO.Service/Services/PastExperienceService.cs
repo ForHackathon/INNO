@@ -17,14 +17,19 @@ namespace INNO.Service.Services;
 public class PastExperienceService : IPastExperienceService
 {
     private readonly IGenericRepository<PastExperience> _repository;
+    private readonly IGenericRepository<User> _userRepository;
     private readonly IMapper _mapper;
     private readonly IFileService _fileService;
 
-    public PastExperienceService(IGenericRepository<PastExperience> repository, IMapper mapper, IFileService fileService)
+    public PastExperienceService(IGenericRepository<PastExperience> repository,
+        IMapper mapper, IFileService fileService,
+        IGenericRepository<User> userRepository)
+
     {
         this._fileService = fileService;
         this._mapper = mapper;
         this._repository = repository;
+        this._userRepository = userRepository;
     }
 
     public async Task<PastExperienceForViewDTO> CreateAsync(PastExperienceForCreationDTO Past)

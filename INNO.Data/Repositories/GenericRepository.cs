@@ -8,12 +8,13 @@ namespace INNO.Data.Repositories;
 public class GenericRepository<T> : IGenericRepository<T> where T : Auditable
 {
     private readonly AppDbContext appDbContext;
-    private readonly DbSet<T> dbSet;
+    private DbSet<T> dbSet;
 
-    public GenericRepository(AppDbContext appDbContext, DbSet<T> dbSet)
+    public GenericRepository(AppDbContext appDbContext)
     {
         this.appDbContext = appDbContext;
-        this.dbSet = dbSet;
+        //this.dbSet = dbSet;
+       this.dbSet = appDbContext.Set<T>();
     }
 
     public async Task<T> CreateAsync(T entity) =>
