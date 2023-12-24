@@ -12,7 +12,7 @@ public interface IGenericRepository<T> where T : Auditable
 
     public Task<T> GetAsync(Expression<Func<T, bool>> expression, string[] includes = null);
 
-    IQueryable<T> GetAllAsync(Expression<Func<T, bool>> expression,
+    IQueryable<T> GetAllAsync(Expression<Func<T, bool>> expression = null,
         string[] includes = null,
         bool isTracking = true);
 

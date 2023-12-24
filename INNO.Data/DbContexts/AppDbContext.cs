@@ -42,6 +42,5 @@ public class AppDbContext : DbContext
             .HasIndex(o => o.Title)
             .IsUnique(true);
 
-
     }
 }

@@ -16,7 +16,7 @@ public interface IPastExperienceService
 
     public Task<PastExperienceForViewDTO> GetByIdAsync(Expression<Func<PastExperience, bool>> expression);
     public Task<ICollection<PastExperienceForViewDTO>> GetAsync(PaginationParams @params,
-        Expression<Func<PastExperience, bool>> expression);
+        Expression<Func<PastExperience, bool>> expression = null);
 
 
 }

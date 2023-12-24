@@ -25,7 +25,7 @@ namespace INNO.Service.Services
             throw new NotImplementedException();
         }
 
-        public Task<OrganizationApps> GetAllAsync(PaginationParams @params, Expression<Func<OrganizationApps, bool>> expression)
+        public Task<OrganizationApps> GetAllAsync(PaginationParams @params, Expression<Func<OrganizationApps, bool>> expression = null)
         {
             throw new NotImplementedException();
         }
