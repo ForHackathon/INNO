@@ -53,7 +53,7 @@ public class UserService : IUserService
     public async Task<bool> DeleteAsync(Expression<Func<User, bool>> expression)
     {
         var value = await _repository.GetAsync(expression);
-        if (value is not null)
+        if (value == null)
         {
             throw new CustomException(404, "User not found");
         }
@@ -64,12 +64,12 @@ public class UserService : IUserService
         return true;
     }
 
-    public async Task<ICollection<UserForViewDTO>> GetAsync(PaginationParams @params,
+    public async Task<IEnumerable<UserForViewDTO>> GetAsync(PaginationParams @params,
         Expression<Func<User, bool>> expression = null)
     {
         var values = _repository.GetAllAsync(expression: expression, isTracking: false);
-        return _mapper.Map<ICollection<UserForViewDTO>>(await values.ToPagedList(@params).ToListAsync());
-       
+        return _mapper.Map<List<UserForViewDTO>>(await values.ToPagedList(@params).ToListAsync());
+
     }
 
     public async Task<UserForViewDTO> GetByIdAsync(Expression<Func<User, bool>> expression)
