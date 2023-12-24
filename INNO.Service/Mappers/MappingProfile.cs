@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using INNO.Domain.Entities.Organizations;
 using INNO.Domain.Entities.Users;
 using INNO.Service.DTOs.Organizations;
