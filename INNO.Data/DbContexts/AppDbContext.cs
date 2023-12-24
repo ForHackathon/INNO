@@ -1,4 +1,5 @@
 ﻿using INNO.Domain.Entities.Application;
+using INNO.Domain.Entities.Attachments;
 using INNO.Domain.Entities.Categories;
 using INNO.Domain.Entities.Categories;
 using INNO.Domain.Entities.Organizations;
@@ -12,6 +13,7 @@ public class AppDbContext : DbContext
     {
     }
 
+    public virtual DbSet<Attachment> Attachments { get; set; }
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<PastExperience> Past_Experiences { get; set; }
     public virtual DbSet<Role> Roles { get; set; }
