@@ -40,6 +40,8 @@ public class UserService : IUserService
 
         user.Password = user.Password.Encrypt();
         var map = _mapper.Map<User>(user);
+        
+        
 
         await _repository.CreateAsync(map);
         await _repository.SaveChangesAsync();

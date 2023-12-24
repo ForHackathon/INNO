@@ -9,7 +9,7 @@ public class UserForViewDTO
 
     public string Email { get; set; }
 
-    public string Role { get; set; }
+    public long RoleId { get; set; }
 
     public IFormFile? Image { get; set; }
 

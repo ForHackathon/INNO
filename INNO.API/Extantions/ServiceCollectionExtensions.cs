@@ -27,7 +27,6 @@ public static class ServiceCollectionExtensions
 {
     public static void AddSessionStore(this IServiceCollection services)
     {
-        services.AddAutoMapper(typeof(MappingProfile));
 
         services.AddScoped<IGenericRepository<Attachment>, GenericRepository<Attachment>>();
         services.AddScoped<IGenericRepository<OwnerStartup>, GenericRepository<OwnerStartup>>();

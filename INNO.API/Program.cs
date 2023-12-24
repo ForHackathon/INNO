@@ -36,14 +36,15 @@ namespace INNO.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddSessionStore();
+            builder.Services.ConfigureJwt(builder.Configuration);
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
            
 
-            builder.Services.AddSessionStore();
-            builder.Services.ConfigureJwt(builder.Configuration);
             //builder.Services.AddSwaggerService();
-            builder.Services.AddHttpContextAccessor();
 
 
 
