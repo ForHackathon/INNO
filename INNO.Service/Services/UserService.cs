@@ -63,8 +63,8 @@ public class UserService : IUserService
 
     public async Task<ICollection<UserForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<User, bool>> expression)
     {
-        var values = _repository.GetAllAsync(expression: expression, isTracking: false);
-        return _mapper.Map<ICollection<UserForViewDTO>>(await values.ToPagedList(@params).ToListAsync());
+        var values = _repository.GetAllAsync(expression: expression, isTracking: false).ToPagedList(@params);
+        return _mapper.Map<ICollection<UserForViewDTO>>(await values.ToListAsync());
 
     }
 

@@ -60,7 +60,7 @@ public class StartupService : IStartupService
         return true;
     }
 
-    public async Task<ICollection<StartupForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<OwnerStartup, bool>> expression)
+    public async Task<ICollection<StartupForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<OwnerStartup, bool>> expression = null)
     {
         var values =  _repository.GetAllAsync(expression: expression, isTracking: false);
         return _mapper.Map<ICollection<StartupForViewDTO>>(await values.ToPagedList(@params).ToListAsync());

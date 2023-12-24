@@ -13,7 +13,6 @@ namespace INNO.Service.Interfaces.IStartups
         public Task<StartupForViewDTO> UpdateAsync(long id, StartupForUpdateDTO startup);
         public Task<bool> DeleteAsync(Expression<Func<OwnerStartup, bool>> expression);
         public Task<StartupForViewDTO> GetByIdAsync(Expression<Func<OwnerStartup, bool>> expression);
-        public Task<ICollection<StartupForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<OwnerStartup, bool>> expression);
-
+        public Task<ICollection<StartupForViewDTO>> GetAsync(PaginationParams @params, Expression<Func<OwnerStartup, bool>> expression = null);
     }
 }
