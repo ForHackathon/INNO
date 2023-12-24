@@ -19,13 +19,16 @@ namespace INNO.Service.Services;
 public class StartupService : IStartupService
 {
     private readonly IGenericRepository<OwnerStartup> _repository;
+    private readonly IGenericRepository<User> _userRepository;
     private readonly IMapper _mapper;
     private readonly IFileService _fileService;
-    public StartupService(IGenericRepository<OwnerStartup> repository, IMapper mapper, IFileService fileService)
+    public StartupService(IGenericRepository<OwnerStartup> repository, IMapper mapper,
+        IFileService fileService, IGenericRepository<User> userRepository)
     {
         this._repository = repository;
         this._mapper = mapper;
         this._fileService = fileService;
+        _userRepository = userRepository;
     }
 
     public async Task<StartupForViewDTO> CreateAsync(StartupForCreationDTO startap)

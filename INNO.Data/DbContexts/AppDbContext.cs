@@ -14,7 +14,6 @@ public class AppDbContext : DbContext
 
     public virtual DbSet<Attachment> Attachments { get; set; }
     public virtual DbSet<User> Users { get; set; }
-    public virtual DbSet<PastExperience> Past_Experiences { get; set; }
     public virtual DbSet<Role> Roles { get; set; }
     public virtual DbSet<UserRole> UserRoles { get; set; }
     public virtual DbSet<Organization> Organizations { get; set; }
