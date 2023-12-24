@@ -32,12 +32,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IGenericRepository<Attachment>, GenericRepository<Attachment>>();
         services.AddScoped<IGenericRepository<OwnerStartup>, GenericRepository<OwnerStartup>>();
         services.AddScoped<IGenericRepository<Organization>, GenericRepository<Organization>>();
-        services.AddScoped<IGenericRepository<PastExperience>, GenericRepository<PastExperience>>();
         services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
 
         services.AddScoped<IStartupService, StartupService>();
         services.AddScoped<IOrganisationService, OrganizationService>();
-        services.AddScoped<IPastExperienceService, PastExperienceService>();
         services.AddScoped<IUserService, UserService>();
         
       

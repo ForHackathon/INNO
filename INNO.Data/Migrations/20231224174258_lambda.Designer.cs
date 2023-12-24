@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace INNO.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231223224844_newmig")]
-    partial class newmig
+    [Migration("20231224174258_lambda")]
+    partial class lambda
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -265,41 +265,6 @@ namespace INNO.Data.Migrations
                     b.ToTable("OwnerStartups");
                 });
 
-            modelBuilder.Entity("INNO.Domain.Entities.Users.PastExperience", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreatAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdateAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Past_Experiences");
-                });
-
             modelBuilder.Entity("INNO.Domain.Entities.Users.Role", b =>
                 {
                     b.Property<long>("Id")
@@ -505,7 +470,7 @@ namespace INNO.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("INNO.Domain.Entities.Users.User", "User")
-                        .WithMany("ownerStartups")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -515,17 +480,6 @@ namespace INNO.Data.Migrations
                     b.Navigation("User");
 
                     b.Navigation("attachments");
-                });
-
-            modelBuilder.Entity("INNO.Domain.Entities.Users.PastExperience", b =>
-                {
-                    b.HasOne("INNO.Domain.Entities.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("INNO.Domain.Entities.Users.User", b =>
@@ -573,11 +527,6 @@ namespace INNO.Data.Migrations
                     b.Navigation("OwnerStartup");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("INNO.Domain.Entities.Users.User", b =>
-                {
-                    b.Navigation("ownerStartups");
                 });
 #pragma warning restore 612, 618
         }
