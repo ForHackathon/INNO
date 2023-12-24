@@ -3,6 +3,7 @@ using INNO.Data.IRepositories;
 using INNO.Domain.Configuration;
 using INNO.Domain.Entities.Attachments;
 using INNO.Domain.Entities.Users;
+using INNO.Service.DTOs.Startups;
 using INNO.Service.DTOs.Users;
 using INNO.Service.Exceptions;
 using INNO.Service.Extantions;
@@ -64,9 +65,9 @@ public class UserService : IUserService
     public async Task<ICollection<UserForViewDTO>> GetAsync(PaginationParams @params,
         Expression<Func<User, bool>> expression = null)
     {
-        var values = _repository.GetAllAsync(expression: expression, isTracking: false).ToPagedList(@params);
-        return _mapper.Map<ICollection<UserForViewDTO>>(await values.ToListAsync());
-
+        var values = _repository.GetAllAsync(expression: expression, isTracking: false);
+        return _mapper.Map<ICollection<UserForViewDTO>>(await values.ToPagedList(@params).ToListAsync());
+       
     }
 
     public async Task<UserForViewDTO> GetByIdAsync(Expression<Func<User, bool>> expression)
