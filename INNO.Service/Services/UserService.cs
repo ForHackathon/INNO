@@ -43,10 +43,10 @@ public class UserService : IUserService
         
         
 
-        await _repository.CreateAsync(map);
+       var saved = await _repository.CreateAsync(map);
         await _repository.SaveChangesAsync();
 
-        return _mapper.Map<UserForViewDTO>(user);
+        return _mapper.Map<UserForViewDTO>(saved);
 
     }
 
